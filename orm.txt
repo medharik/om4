@@ -1,0 +1,2 @@
+//ORM : OBJECT RELATIONAL MAPPING : liaison entre l'objet et le relationel
+// Personne::all() => ORM => select * from personnes
