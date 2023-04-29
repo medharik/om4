@@ -9,7 +9,7 @@ class ProduitController extends Controller
 {
     public function nouveau()
     {
-     
+
         return view("create");
     }
     public function enregistrer(Request $request)
@@ -22,5 +22,12 @@ class ProduitController extends Controller
     {
         return view("index");
     }
+
+   public function tous()
+   {
+   $produits= Produit::paginate(10);//ORM : ELOQUENT
+   return view ("liste_produit",['produits'=>$produits]);
+
+   }
 
 }

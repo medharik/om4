@@ -8,4 +8,4 @@ puis dans le fichier DatabaseSeeder on precise combien de produit on veut creer 
         \App\Models\Produit::factory(1000)->create();
 
 
-        Working Directory => stage area => commit .
+        Working Directory => stage area => commit

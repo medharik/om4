@@ -21,3 +21,4 @@ Route::get('new', [ProduitController::class, 'nouveau']);
 Route::get('/produits', [ProduitController::class, 'liste']);
 Route::post('/enregistrer', [ProduitController::class, 'enregistrer']);
 
+Route::get('/tous', [ProduitController::class, 'tous']);
