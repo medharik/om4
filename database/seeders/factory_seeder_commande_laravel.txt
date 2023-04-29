@@ -1,0 +1,11 @@
+sur CLI :
+php artisan make:factory ProduitFactory --model=Produit
+dans le fichier ProduitFactory.php
+ 'libelle' => $this->faker->name(),
+            'prix' => $this->faker->numberBetween(0,9999),
+            'qte' => $this->faker->numberBetween(0,20)
+puis dans le fichier DatabaseSeeder on precise combien de produit on veut creer dans la bd
+        \App\Models\Produit::factory(1000)->create();
+
+
+        Working Directory => stage area => commit .
