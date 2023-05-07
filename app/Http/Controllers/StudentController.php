@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cours;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class CoursController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,13 @@ class CoursController extends Controller
      */
     public function index()
     {
-        $cours=Cours::paginate(1000);
-        return view('cours.index',['cours'=>$cours,'notice'=>'Liste des cours : ']);
+        //
+        $students=Student::all();
+        $titre="liste des etudiants";
+        // return view("students/index",["students"=>$students,'titre'=>$titre])
+        // return view("students/index",compact('students','titre'));
+        return $students;
+
     }
 
     /**
@@ -26,22 +30,24 @@ class CoursController extends Controller
      */
     public function create()
     {
-        //afficher le nouveau form
-        return view('cours/create');
+$titre="Nouvel etudiant :";
+        return view("students.create",compact('titre'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // echo "le titre de ce cours est ".$request->titre;
-        Cours::create($request->all());
-
-     return   redirect(url("/cours"));
+         //$data=$request->all();
+        // $student=new Student($data);
+        // $student->save();
+        Student::create($request->all());
+        // return redirect()->route('students.index');
+        return $this->index();
     }
 
     /**
@@ -52,7 +58,10 @@ class CoursController extends Controller
      */
     public function show($id)
     {
-        //
+        $student=Student::find($id);
+        $titre="detail de l'etudiant : ".$student->nom;
+        return view("students.show",compact('student','titre'));
+
     }
 
     /**
@@ -63,7 +72,10 @@ class CoursController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student=Student::find($id);
+        $titre="Edition de l'etudiant : ".$student->nom;
+        return view("students.edit",compact('student','titre'));
+
     }
 
     /**
@@ -75,7 +87,12 @@ class CoursController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $student=Student::find($id);
+        // $student->nom=$request->nom;
+        // $student->save();
+        $student->update($request->all());
+        return $this->index();
+
     }
 
     /**
@@ -86,6 +103,8 @@ class CoursController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student=Student::find($id);
+        $student->delete();
+        return $this->index();
     }
 }

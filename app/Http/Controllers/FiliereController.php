@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cours;
+use App\Models\Filiere;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class CoursController extends Controller
+class FiliereController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,9 @@ class CoursController extends Controller
      */
     public function index()
     {
-        $cours=Cours::paginate(1000);
-        return view('cours.index',['cours'=>$cours,'notice'=>'Liste des cours : ']);
+        //liste des filieres
+        $filieres =  Filiere::all();
+        return view("filieres/index", ["filieres" => $filieres]);
     }
 
     /**
@@ -26,22 +26,19 @@ class CoursController extends Controller
      */
     public function create()
     {
-        //afficher le nouveau form
-        return view('cours/create');
+        return view("filieres/create");
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        // echo "le titre de ce cours est ".$request->titre;
-        Cours::create($request->all());
-
-     return   redirect(url("/cours"));
+        Filiere::create($request->all());
+        return redirect()->route("filiere.index");
     }
 
     /**
@@ -52,7 +49,9 @@ class CoursController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $filiere = Filiere::find($id);
+        return view("filieres.show", ["filiere" => $filiere]);
     }
 
     /**
@@ -63,7 +62,8 @@ class CoursController extends Controller
      */
     public function edit($id)
     {
-        //
+        $filiere = Filiere::find($id);
+        return view("filieres.edit", ["filiere" => $filiere]);
     }
 
     /**
@@ -75,7 +75,9 @@ class CoursController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $filiere = Filiere::find($id);
+        $filiere->update($request->all());
+        return redirect()->route("filiere.index");
     }
 
     /**
@@ -86,6 +88,8 @@ class CoursController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $filiere = Filiere::find($id);
+        $filiere->delete();
+        return redirect()->route("filiere.index");
     }
 }
