@@ -30,6 +30,7 @@ class CoursController extends Controller
         return view('cours/create');
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
