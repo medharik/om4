@@ -17,8 +17,8 @@ class CreatePersonnelsTable extends Migration
             $table->id();
             $table->string("nom");
             $table->string("prenom");
-            $table->string("chemin");
-            $table->string("email");
+            $table->string("chemin")->nullable();
+            $table->string("email")->unique();
             $table->string("cin");
             $table->string("telephone");
             $table->string("adresse");

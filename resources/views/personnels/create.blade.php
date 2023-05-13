@@ -5,23 +5,41 @@
 @section('main')
    <div class="row">
     <div class="col-md-6 mx-auto">
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <form action="{{ route('personnels.store') }}" method="post">
             @csrf
             <div class="mb-3">
                 <label for="nom" class="form-label text-capitalize">nom : </label>
-                <input required type="text" name="nom" id="nom" class="form-control">
+                <input  required type="text" name="nom" id="nom" class="form-control"  value="{{old('nom')}}">
             </div>
             <div class="mb-3">
                 <label  for="prenom" class="form-label text-capitalize">prenom : </label>
-                <input required type="text" name="prenom" id="prenom" class="form-control">
+                <input required type="text" name="prenom" value="{{old('prenom')? old('prenom'):''}}" id="prenom" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="cin" class="form-label text-capitalize">cin : </label>
                 <input required pattern="[a-z]{1,2}[ /-]{0,}[0-9]{5,6}" type="text" name="cin" id="cin" class="form-control">
+                @error('cin')
+               <div class="alert alert-danger"> {{$message}}</div>
+            @enderror
+
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label text-capitalize">email : </label>
-                <input  type="email" name="email" id="email" class="form-control">
+                <input   type="email" name="email" id="email" class="form-control @error('email')
+is-invalid
+                @enderror">
+                @error('email')
+                    {{$message}}
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="adresse" class="form-label text-capitalize">adresse : </label>

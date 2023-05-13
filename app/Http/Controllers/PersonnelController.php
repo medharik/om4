@@ -44,6 +44,12 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'email' => 'required|unique:personnels|email',
+            'cin' => 'unique:personnels',
+            'nom' => 'required|min:2',
+            ]);
+
         Personnel::create($request->all());
         return redirect()->route('personnels.index');
     }
