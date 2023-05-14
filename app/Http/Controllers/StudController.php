@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cours;
+use App\Models\Student;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class CoursController extends Controller
+class StudController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class CoursController extends Controller
      */
     public function index()
     {
-        $cours=Cours::paginate(1000);
-        return view('cours.index',['cours'=>$cours,'notice'=>'Liste des cours : ']);
+        $students=Student::all();
+        return $students;
     }
 
     /**
@@ -26,12 +25,10 @@ class CoursController extends Controller
      */
     public function create()
     {
-        //afficher le nouveau form
-        return view('cours/create');
+        //
     }
 
-
-    /** ressource restfull  =  personnel (Objectif : REVISION MVC / REST/ VALIDATION DES DATA, upload)
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,10 +36,8 @@ class CoursController extends Controller
      */
     public function store(Request $request)
     {
-        // echo "le titre de ce cours est ".$request->titre;
-        Cours::create($request->all());
-
-     return   redirect(url("/cours"));
+        $student=Student::create($request->all());
+        return $student;
     }
 
     /**
@@ -53,7 +48,8 @@ class CoursController extends Controller
      */
     public function show($id)
     {
-        //
+     $student=   Student::find($id);
+     return $student;
     }
 
     /**

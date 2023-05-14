@@ -44,13 +44,18 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'email' => 'required|unique:personnels|email',
-            'cin' => 'unique:personnels',
-            'nom' => 'required|min:2',
-            ]);
+        // $request->validate([
+        //     'email' => 'required|unique:personnels|email',
+        //     'cin' => 'unique:personnels',
+        //     'nom' => 'required|min:2',
+        // ]);
+        $data = $request->all();
+       $data['chemin']= $request->chemin->store('mes_images');
+       Personnel::create($data);
+    //    dd($image_name);
 
-        Personnel::create($request->all());
+
+
         return redirect()->route('personnels.index');
     }
 
@@ -65,9 +70,8 @@ class PersonnelController extends Controller
     public function show($id)
     {
         $personnel = Personnel::find($id);
-        $titre="Consultation du personnel :".$personnel->nom." ".$personnel->prenom;
-        return view("personnels.show",compact('personnel','titre'));
-
+        $titre = "Consultation du personnel :" . $personnel->nom . " " . $personnel->prenom;
+        return view("personnels.show", compact('personnel', 'titre'));
     }
 
     /**
@@ -81,8 +85,8 @@ class PersonnelController extends Controller
     public function edit($id)
     {
         $personnel = Personnel::find($id);
-        $titre = "Modificationle personnel :".$personnel->nom." ".$personnel->prenom;
-        return view("personnels.edit", compact('personnel','titre'));
+        $titre = "Modificationle personnel :" . $personnel->nom . " " . $personnel->prenom;
+        return view("personnels.edit", compact('personnel', 'titre'));
     }
 
     /**
@@ -101,7 +105,6 @@ class PersonnelController extends Controller
         $personnel = Personnel::find($id);
         $personnel->update($request->all());
         return redirect()->route('personnels.index');
-
     }
 
     /**

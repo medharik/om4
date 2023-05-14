@@ -4,6 +4,7 @@ use App\Http\Controllers\CoursController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ProduitController;
+use App\Http\Controllers\StudController;
 use App\Http\Controllers\StudentController;
 use App\Models\Personnel;
 use Illuminate\Support\Facades\Route;
@@ -40,4 +41,5 @@ Route::resource('filiere', FiliereController::class);
 Route::apiResource('students', StudentController::class);
 //generation des 7 liens restfull
 Route::resource('personnels', PersonnelController::class);
+Route::apiResource('/api/studs', StudController::class);
 

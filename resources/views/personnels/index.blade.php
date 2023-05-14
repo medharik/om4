@@ -19,7 +19,7 @@
                     <th scope="row">{{$p->id}}</th>
                     <td>{{$p->nom}} {{$p->prenom}}</td>
                     <td>{{$p->cin}}</td>
-                    <td>{{$p->chemin}}</td>
+                    <td><img src="{{asset('storage/'.$p->chemin)}}" alt=""></td>
                     <td>
                         <a href="" class="btn btn-sm text-danger fs-4"><i class="fa fa-trash" aria-hidden="true"></i>
                         </a>

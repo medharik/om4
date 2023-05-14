@@ -14,7 +14,7 @@
         </ul>
     </div>
 @endif
-        <form action="{{ route('personnels.store') }}" method="post">
+        <form action="{{ route('personnels.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="nom" class="form-label text-capitalize">nom : </label>
@@ -49,6 +49,10 @@ is-invalid
                 <div class="mb-3">
                     <label for="tel" class="form-label text-capitalize">tel : </label>
                     <input type="text" name="telephone" id="tel" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="tel" class="form-label text-capitalize">Image : </label>
+                    <input type="file" name="chemin" id="chemin" class="form-control">
                 </div>
             <div class="mb-3">
                 <button class="btn btn-primary">Ajouter le personnel</button>
