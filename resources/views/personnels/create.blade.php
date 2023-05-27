@@ -54,6 +54,18 @@ is-invalid
                     <label for="tel" class="form-label text-capitalize">Image : </label>
                     <input type="file" name="chemin" id="chemin" class="form-control">
                 </div>
+                <div class="mb-3">
+                    <label for="departement_id" class="form-label text-capitalize">Departement : </label>
+                    @foreach ($departements as $d)
+<div class="form-check form-switch">
+
+    <input class="form-check-input"  value="{{$d->id}}" name="departement_id" type="radio" role="switch" id="flexSwitchCheckChecked">
+    <label class="form-check-label" for="flexSwitchCheckChecked">{{$d->nom}}</label>
+  </div>
+                    @endforeach
+
+
+                </div>
             <div class="mb-3">
                 <button class="btn btn-primary">Ajouter le personnel</button>
             </div>

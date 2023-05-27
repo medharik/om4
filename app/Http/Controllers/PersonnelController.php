@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departement;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,8 @@ class PersonnelController extends Controller
     public function create()
     {
         $titre = "Ajouter un personnel";
-
-        return view("personnels/create", compact('titre'));
+$departements=Departement::all();
+        return view("personnels/create", compact('titre','departements'));
     }
 
     /**
@@ -44,13 +45,13 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'email' => 'required|unique:personnels|email',
-        //     'cin' => 'unique:personnels',
-        //     'nom' => 'required|min:2',
-        // ]);
+        $request->validate([
+            'email' => 'required|unique:personnels|email',
+            'cin' => 'unique:personnels',
+            'nom' => 'required|min:2',
+        ]);
         $data = $request->all();
-       $data['chemin']= $request->chemin->store('mes_images');
+       $data['chemin']= $request->chemin->store('images');
        Personnel::create($data);
     //    dd($image_name);
 

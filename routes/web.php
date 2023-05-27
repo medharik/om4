@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoursController;
+use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ProduitController;
@@ -41,5 +42,6 @@ Route::resource('filiere', FiliereController::class);
 Route::apiResource('students', StudentController::class);
 //generation des 7 liens restfull
 Route::resource('personnels', PersonnelController::class);
+Route::resource('departements', DepartementController::class);
 Route::apiResource('/api/studs', StudController::class);
 
